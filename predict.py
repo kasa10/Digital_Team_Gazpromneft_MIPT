@@ -9,7 +9,7 @@ df3=pd.read_csv('data/pad_data.csv')
 
 
 #%%
-p=[]
+
 
 u=df2[df2['Номер скважины']==1]
 u['Номер скважины'].count()
@@ -27,10 +27,54 @@ x2=x1.sort_values(ascending=False) #Отсортированный
 u['Дебит нефти'].plot()
 plt.show()
 
+
+#ТУТ РАЗДЕЛЯЕМ
+#%%
+from sklearn.model_selection import train_test_split
+
+train1, test1 = train_test_split(u, test_size=0.25, shuffle=False)
+
+
+print(f'Размер train таблицы {train1.shape}')
+print(f'Размер test таблицы {test1.shape}')
+
 #%%
 #Предсказание по средней скользящей за 7 дней
-u['m7']=u['Дебит нефти'].rolling( 7 ).mean()
+train1['m7']=train1['Дебит нефти'].rolling( 7 ).mean()
 
-u['m7'].plot()
-u['Дебит нефти'].plot()
+a=train1['m7'].describe()
+train1 = train1.fillna(a['75%'])
+
+train1['m7'].plot()
 plt.show()
+
+#%%
+train1['m7'].count()
+for i in range(0,90):
+    train1 = train1.append(pd.Series(), ignore_index=True)
+
+
+
+
+
+
+
+#%%
+#Предсказание по средней скользящей за 30 дней
+train1['m30']=train1['Дебит нефти'].rolling( 30 ).mean()
+
+a=train1['m30'].describe()
+train1 = train1.fillna(a['75%'])
+
+train1['m30'].plot()
+plt.show()
+
+
+
+
+
+
+
+#%%
+
+
