@@ -13,7 +13,7 @@ prim=pd.read_csv('baseline/baseline_forecast.csv')
 
 #%%
 e1=[]
-for i in range(1,105+1):
+for i in range(0,105+1):
     u=df2[df2['Номер скважины']==i]
     u['Номер скважины'].count()
 
@@ -28,13 +28,17 @@ for i in range(1,105+1):
 
     #ТУТ РАЗДЕЛЯЕМ
     #%%
-    from sklearn.model_selection import train_test_split
+    # from sklearn.model_selection import train_test_split
+    #
+    # train1, test1 = train_test_split(u, test_size=0.15, shuffle=False)
+    #
+    #
+    # print(f'Размер train таблицы {train1.shape}')
+    # print(f'Размер test таблицы {test1.shape}')
 
-    train1, test1 = train_test_split(u, test_size=0.15, shuffle=False)
-
-
-    print(f'Размер train таблицы {train1.shape}')
-    print(f'Размер test таблицы {test1.shape}')
+    test = u[u.datetime >= '1992-01-13']
+    test1 = test[test.datetime <= '1992-04-11']
+    train1 = u[u.datetime < '1992-01-13']
 
     #%%
     #Предсказание по средней скользящей за 7 дней
@@ -47,8 +51,8 @@ for i in range(1,105+1):
     # plt.show()
 
     #%%
-    train1['m7'].count()
-    for i in range(0,93):
+    #train1['m7'].count()
+    for i in range(0,90):
         train1 = train1.append(pd.Series(), ignore_index=True)
         #НИЖЕ ВМЕСТО ДЕБИТ НЕФТИ БЫЛО 'm7'
         train1 = train1.fillna(train1['Дебит нефти'][train1['Дебит нефти'].count()-4:train1['Дебит нефти'].count()-1].sum()/3)
@@ -90,13 +94,14 @@ for i in range(1,105+1):
 
 
     try:
-        rmse_metric = mean_squared_error(train1['m7'][527:620],test1['Дебит нефти'],squared=False)
+        rmse_metric = mean_squared_error(train1['Дебит нефти'][-90:],test1['Дебит нефти'][-90:],squared=False)
         print(rmse_metric)
         e1.append(rmse_metric)
     except:
         continue
 
 print('СРЕДНЯЯ ОШИБКА ',mean(e1))
+print(len(e1))
     # train1['Дебит нефти'].plot()
     # plt.show()
 
