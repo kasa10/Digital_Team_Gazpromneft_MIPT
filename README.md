@@ -3,6 +3,6 @@
 
 ### Наша команда
 #### Касмынин Кирилл - kirill.kas@mail.ru
-#### Анастасия Ямановская - a.yamanovskaya@gmail.com
-#### Кирилл Шабанов - kirilliy.shabanov@yandex.ru
-#### Ольга Матыкина - omatykina@mail.ru
+#### Ямановская Анастасия - a.yamanovskaya@gmail.com
+#### Шабанов Кирилл - kirilliy.shabanov@yandex.ru
+#### Матыкина Ольга - omatykina@mail.ru
