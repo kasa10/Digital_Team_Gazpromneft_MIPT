@@ -10,4 +10,5 @@ corr=df.corr()
 #%%
 x1=corr['Дебит нефти']
 #x1.keys() - названия cтолбцов
-#
+
+x2=x1.sort_values(ascending=False)
