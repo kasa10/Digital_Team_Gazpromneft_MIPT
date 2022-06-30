@@ -101,6 +101,7 @@ for i in range(0,105+1):
         continue
 
 print('СРЕДНЯЯ ОШИБКА ',mean(e1))
+print('Минимальная ОШИБКА ',min(e1))
 print(len(e1))
     # train1['Дебит нефти'].plot()
     # plt.show()
